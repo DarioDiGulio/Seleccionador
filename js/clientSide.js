@@ -40,6 +40,10 @@ function createDiv() {
   return document.createElement("div");
 }
 
+// function deleteInput(input) {
+//   input.parentElement.parentElement.remove();
+// }
+
 // -------------------------- GENERAL FUNCTIONS -------------------------- //
 
 function setInitialVisibility() {
@@ -83,7 +87,7 @@ function createLabel(element) {
 
 function createInput(element) {
   let div = createDiv();
-  div.className = "uk-form-controls";
+  div.className = "uk-flex";
   let input = document.createElement("input");
   input.className = "uk-input";
   input.type = "text";
@@ -93,7 +97,18 @@ function createInput(element) {
     input.placeholder = "Nombre de la variable";
   }
   div.appendChild(input);
+  div.appendChild(createSpan());
   return div;
+}
+
+function createSpan() {
+  let span = document.createElement("span");
+  span.className = "uk-badge uk-button deleteInput";
+  span.innerHTML = "-";
+  span.addEventListener(onclick, function () {
+    span.parentElement.parentElement.remove();
+  });
+  return span;
 }
 
 // -------------------------- OPTIONS -------------------------- //
@@ -101,17 +116,22 @@ function createInput(element) {
 function addOption(element) {
   optionListLength = optionListLength + 1;
   let optionList = getOptionListElement();
-  optionList.appendChild(createLabel(element));
-  optionList.appendChild(createInput(element));
+  optionList.appendChild(createContainer(element));
 }
 
 function setUpOptionList() {
   let optionList = getOptionListElement().children;
   for (const element of optionList) {
-    if (element.tagName == "DIV") {
-      optionListGlobal.push(element.children[0].value);
-    }
+    optionListGlobal.push(element.children[1].lastElementChild.value);
   }
+}
+
+function createContainer(element) {
+  let div = createDiv();
+  div.className = "uk-form-controls";
+  div.appendChild(createLabel(element));
+  div.appendChild(createInput());
+  return div;
 }
 
 // -------------------------- VARS -------------------------- //
@@ -120,7 +140,7 @@ function setUpVarList() {
   let varList = getVarListElement().children;
   for (const element of varList) {
     if (element.tagName == "DIV") {
-      varListGlobal.push(element.children[0].value);
+      varListGlobal.push(element.children[1].lastElementChild.value);
     }
   }
   setUpPriorityList();
