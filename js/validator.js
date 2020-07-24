@@ -14,14 +14,18 @@ function validator(site) {
   let valuesList;
   site === "options"
     ? (valuesList = getOptionListElement().children)
-    : (valuesList = getVarListElement().children);
+    : (valuesList = document.getElementsByClassName('input-vars'))
   let valuesLength = 0;
   let inputLength = 0;
   for (let i = 0; i < valuesList.length; i++) {
-    if (!valuesList[i].className === 'uk-form-label'){
-      let input = valuesList[i].lastElementChild.firstElementChild.value;
+    if (!valuesList[i].length !== 0){
+      let input
+      site === "options"
+      ? (input = valuesList[i].lastElementChild.firstElementChild.value)
+      : (input = valuesList[i].value) 
       inputLength++;
-      if (input.length !== 0) valuesLength++;
+      if (input.length !== 0) 
+      valuesLength++;
     }
   }
 

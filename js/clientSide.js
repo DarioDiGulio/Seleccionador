@@ -89,11 +89,12 @@ function createInput(element) {
   let div = createDiv();
   div.className = "uk-flex";
   let input = document.createElement("input");
-  input.className = "uk-input";
   input.type = "text";
   if (element === "option") {
+    input.className = "uk-input";
     input.placeholder = "Nombre de la opción";
   } else {
+    input.className = "uk-input input-vars";
     input.placeholder = "Nombre de la variable";
   }
   div.appendChild(input);
@@ -137,11 +138,9 @@ function createContainer(element) {
 // -------------------------- VARS -------------------------- //
 
 function setUpVarList() {
-  let varList = getVarListElement().children;
+  let varList = document.getElementsByClassName('input-vars')
   for (const element of varList) {
-    if (element.tagName == "DIV") {
-      varListGlobal.push(element.children[1].lastElementChild.value);
-    }
+    varListGlobal.push(element.value);
   }
   setUpPriorityList();
 }
