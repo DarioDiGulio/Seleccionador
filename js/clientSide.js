@@ -123,15 +123,16 @@ function addOption(element) {
 function setUpOptionList() {
   let optionList = getOptionListElement().children;
   for (const element of optionList) {
-    optionListGlobal.push(element.children[1].lastElementChild.value);
+    optionListGlobal.push(element.children[1].firstElementChild.value);
   }
+  
 }
 
 function createContainer(element) {
   let div = createDiv();
   div.className = "uk-form-controls";
   div.appendChild(createLabel(element));
-  div.appendChild(createInput());
+  div.appendChild(createInput(element));
   return div;
 }
 

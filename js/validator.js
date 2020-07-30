@@ -37,6 +37,29 @@ function validator(site) {
   }
 }
 
+
+function validatePriority(){
+
+let varsPorcent = document.getElementById('liVars').children
+
+for (const vars of varsPorcent) {
+
+  let zelda = vars.children
+
+  for (let index = 1; index < zelda.length; index++) {
+    console.log(zelda[index].firstElementChild.firstElementChild)
+    
+  }
+}
+
+
+
+
+}
+
+
+
+
 // -------------------------- NEXTSTEPS -------------------------- //
 
 function runNextStepSite(site) {
