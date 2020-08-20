@@ -4,10 +4,14 @@ let parts = [];
 let valuesParts = [];
 
 function calculate() {
-  calculatePriorityPercentage();
-  setIndexsPriority();
-  setParts();
-  setMatrixParts();
+  if (validatePriority()) {
+    calculatePriorityPercentage();
+    setIndexsPriority();
+    setParts();
+    setMatrixParts();
+  } else {
+    showErrorInliVars();
+  }
 }
 
 function calculatePriorityPercentage() {
