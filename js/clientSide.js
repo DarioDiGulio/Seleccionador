@@ -102,13 +102,22 @@ function createInput(element) {
   return div;
 }
 
-function createSpan() {
+function createSpan() {         // se agrego "click entre comillas unicamente para eliminar"
   let span = document.createElement("span");
   span.className = "uk-badge uk-button deleteInput";
   span.innerHTML = "-";
-  span.addEventListener("click", function () {  // se agrego "click entre comillas unicamente"
+  span.addEventListener("click", function () { 
     
-    span.parentElement.parentElement.remove();
+    if(span.parentElement.firstChild.className === 'uk-input input-vars')
+    {
+      span.parentElement.remove()
+      varListLength--;
+    } 
+    else{
+      span.parentElement.parentElement.remove();
+      optionListLength--; // restamos la lista si eliminamos}
+    //if(element==='input-vars'){span.parentElement.remove()}
+    }
   });
   return span;
 }
