@@ -106,7 +106,8 @@ function createSpan() {
   let span = document.createElement("span");
   span.className = "uk-badge uk-button deleteInput";
   span.innerHTML = "-";
-  span.addEventListener(onclick, function () {
+  span.addEventListener("click", function () {  // se agrego "click entre comillas unicamente"
+    
     span.parentElement.parentElement.remove();
   });
   return span;
