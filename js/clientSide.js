@@ -6,6 +6,7 @@ let optionListGlobal = [];
 let varListGlobal = [];
 let varListPriority = [];
 
+
 // -------------------------- UTILS -------------------------- //
 
 function getOptionListElement() {
@@ -102,7 +103,23 @@ function createInput(element) {
   return div;
 }
 
-function createSpan() {         // se agrego "click entre comillas unicamente para eliminar"
+
+function addEventlis() {
+  
+    if(span.parentElement.firstChild.className === 'uk-input input-vars')
+    {
+      span.parentElement.remove()
+      varListLength--;
+    } 
+    else{
+      span.parentElement.parentElement.remove();
+      optionListLength--;
+    }
+  
+  
+
+}
+function createSpan() {         
   let span = document.createElement("span");
   span.className = "uk-badge uk-button deleteInput";
   span.innerHTML = "-";
@@ -115,11 +132,10 @@ function createSpan() {         // se agrego "click entre comillas unicamente pa
     } 
     else{
       span.parentElement.parentElement.remove();
-      optionListLength--; // restamos la lista si eliminamos}
-    //if(element==='input-vars'){span.parentElement.remove()}
+      optionListLength--;
     }
   });
-  return span;
+ 
 }
 
 // -------------------------- OPTIONS -------------------------- //
