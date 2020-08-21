@@ -104,21 +104,7 @@ function createInput(element) {
 }
 
 
-function addEventlis() {
-  
-    if(span.parentElement.firstChild.className === 'uk-input input-vars')
-    {
-      span.parentElement.remove()
-      varListLength--;
-    } 
-    else{
-      span.parentElement.parentElement.remove();
-      optionListLength--;
-    }
-  
-  
 
-}
 function createSpan() {         
   let span = document.createElement("span");
   span.className = "uk-badge uk-button deleteInput";
