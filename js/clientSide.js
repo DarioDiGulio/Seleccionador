@@ -6,6 +6,7 @@ let optionListGlobal = [];
 let varListGlobal = [];
 let varListPriority = [];
 
+
 // -------------------------- UTILS -------------------------- //
 
 function getOptionListElement() {
@@ -89,11 +90,12 @@ function createInput(element) {
   let div = createDiv();
   div.className = "uk-flex";
   let input = document.createElement("input");
-  input.className = "uk-input";
   input.type = "text";
   if (element === "option") {
+    input.className = "uk-input";
     input.placeholder = "Nombre de la opción";
   } else {
+    input.className = "uk-input input-vars";
     input.placeholder = "Nombre de la variable";
   }
   div.appendChild(input);
@@ -101,14 +103,25 @@ function createInput(element) {
   return div;
 }
 
-function createSpan() {
+
+
+function createSpan() {         
   let span = document.createElement("span");
   span.className = "uk-badge uk-button deleteInput";
   span.innerHTML = "-";
-  span.addEventListener(onclick, function () {
-    span.parentElement.parentElement.remove();
+  span.addEventListener("click", function () { 
+    
+    if(span.parentElement.firstChild.className === 'uk-input input-vars')
+    {
+      span.parentElement.remove()
+      varListLength--;
+    } 
+    else{
+      span.parentElement.parentElement.remove();
+      optionListLength--;
+    }
   });
-  return span;
+ 
 }
 
 // -------------------------- OPTIONS -------------------------- //
@@ -122,26 +135,25 @@ function addOption(element) {
 function setUpOptionList() {
   let optionList = getOptionListElement().children;
   for (const element of optionList) {
-    optionListGlobal.push(element.children[1].lastElementChild.value);
+    optionListGlobal.push(element.children[1].firstElementChild.value);
   }
+  
 }
 
 function createContainer(element) {
   let div = createDiv();
   div.className = "uk-form-controls";
   div.appendChild(createLabel(element));
-  div.appendChild(createInput());
+  div.appendChild(createInput(element));
   return div;
 }
 
 // -------------------------- VARS -------------------------- //
 
 function setUpVarList() {
-  let varList = getVarListElement().children;
+  let varList = document.getElementsByClassName('input-vars')
   for (const element of varList) {
-    if (element.tagName == "DIV") {
-      varListGlobal.push(element.children[1].lastElementChild.value);
-    }
+    varListGlobal.push(element.value);
   }
   setUpPriorityList();
 }
