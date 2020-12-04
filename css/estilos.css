@@ -1,4 +1,19 @@
-.deleteInput{
-    background-color: #f0506e !important;
-    color: #fff !important;
+html,
+body {
+  background-color: rgb(34, 34, 34) !important;
+}
+
+.deleteInput {
+  background-color: #f0506e !important;
+  color: #fff !important;
+}
+
+button,
+.deleteInput {
+  cursor: pointer !important;
+}
+
+input,
+button {
+  border-radius: 10px !important;
 }

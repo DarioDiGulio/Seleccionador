@@ -4,16 +4,36 @@ let parts = [];
 let valuesParts = [];
 
 function calculate() {
-  calculatePriorityPercentage();
-  setIndexsPriority();
-  setParts();
-  setMatrixParts();
+  if (isMatrixValid()) {
+    calculatePriorityPercentage();
+    setIndexsPriority();
+    setParts();
+    setMatrixParts();
+  }
+}
+
+function isMatrixValid() {
+  const rows = document.getElementById("liVars").children;
+  let valid = true;
+  for (let i = 0; i < rows.length; i++) {
+    let values = [];
+    let selects = rows[i].getElementsByClassName("select");
+    for (let j = 0; j < selects.length; j++) {
+      values.push(selects[j].value);
+    }
+    console.log(values)
+    let uniqs = values.map(function(item, index, array) {
+      return array.indexOf(item) === index;
+    })
+    valid = !uniqs.includes(true);
+  }
+  console.log(valid)
+  return valid;
 }
 
 function calculatePriorityPercentage() {
   let rows = getRows();
   priorityPercentage = 100 / rows.length;
-  console.log(priorityPercentage);
 }
 
 function getRows() {
@@ -29,7 +49,6 @@ function setIndexsPriority() {
     let priority = 100 - priorityPercentage * i;
     indexsPriority.push(priority);
   }
-  console.log(indexsPriority);
 }
 
 function getOptionsLength() {
@@ -41,7 +60,6 @@ function setParts() {
     let part = indexsPriority[i] / getOptionsLength();
     parts.push(part);
   }
-  console.log(parts);
 }
 
 function setMatrixParts() {
@@ -52,5 +70,4 @@ function setMatrixParts() {
     }
     valuesParts.push(values);
   }
-  console.log(valuesParts);
 }

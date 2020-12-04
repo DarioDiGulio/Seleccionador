@@ -25,12 +25,13 @@
         <p class="uk-h1">Seleccionador</p>
     </div>
     <div class="uk-card uk-card-secondary uk-card-body">
-        <p class="uk-text-success">
+        <p class="uk-text-success uk-text-center">
             El seleccionador es una interfáz que va a ayudar a tomar decisiones complejas de una forma sencilla.
             Lo único que tenés que hacer es seguir las instrucciones de cada paso y verás el resultado.
         </p>
     </div>
-    <div class="uk-card uk-card-secondary uk-card-body" id="step1" uk-height-viewport="expand: true">
+    <button class="uk-button uk-button-danger uk-button-small" onclick="location.reload();">Reiniciar</button>
+    <div class="uk-card uk-card-secondary uk-card-body" id="step1">
         <span class="uk-card-badge uk-badge">Paso 1</span>
         <h3 class="uk-card-title">Opciones</h3>
         <p>Ingresá las opciones que estás evaluando.</p>
@@ -49,13 +50,13 @@
             </div>
         </div>
         <p class="uk-text-danger" id="optionsError" hidden></p>
-        <p uk-margin class="uk-text-right">
-            <button class="uk-button uk-button-default uk-button-small" onclick="addElement('option')">Agregar
+        <p class="uk-text-right uk-margin">
+            <button class="uk-button uk-button-default uk-button-small" onclick="addElement('option'), deleteInput('option')">Agregar
                 Opción</button>
             <button class="uk-button uk-button-danger uk-button-small" onclick="validator('options')">Listo</button>
         </p>
     </div>
-    <div class="uk-card uk-card-secondary uk-card-body" id="step2" uk-height-viewport="expand: true">
+    <div class="uk-card uk-card-secondary uk-card-body" id="step2">
         <span class="uk-card-badge uk-badge">Paso 2</span>
         <h3 class="uk-card-title">Variables</h3>
         <p>Ingresá las variables que deberías tener en cuenta para tomar esta decisión.</p>
@@ -68,13 +69,13 @@
             </div>
         </div>
         <p class="uk-text-danger" id="varsError" hidden></p>
-        <p uk-margin class="uk-text-right">
-            <button class="uk-button uk-button-default uk-button-small" onclick="addElement('var')">Agregar
+        <p class="uk-text-right uk-margin">
+            <button class="uk-button uk-button-default uk-button-small" onclick="addElement('var'), deleteInput('var')">Agregar
                 Variable</button>
             <button class="uk-button uk-button-danger uk-button-small" onclick="validator('vars')">Listo</button>
         </p>
     </div>
-    <div class="uk-card uk-card-secondary uk-card-body" id="step3" uk-height-viewport="expand: true">
+    <div class="uk-card uk-card-secondary uk-card-body" id="step3">
         <span class="uk-card-badge uk-badge">Paso 3</span>
         <h3 class="uk-card-title">Prioridades</h3>
         <p>Ordená las variables según la prioridad que creas que deben tener.</p>
@@ -83,12 +84,12 @@
             <div uk-sortable="group: sortable-group" id="varPriority">
             </div>
         </div>
-        <p uk-margin class="uk-text-right">
+        <p class="uk-text-right uk-margin ">
             <button class="uk-button uk-button-danger uk-button-small"
                 onclick="setUpPriority(), makeVisibleStep(4), setValues()">Listo</button>
         </p>
     </div>
-    <div class="uk-card uk-card-secondary uk-card-body" id="step4" uk-height-viewport="expand: true">
+    <div class="uk-card uk-card-secondary uk-card-body" id="step4">
         <span class="uk-card-badge uk-badge">Paso 4</span>
         <h3 class="uk-card-title">Valores</h3>
         <p>Ordená los valores internos de menor mayor, donde 1 es el peor valor. Hacé esto con cada variable comparando
@@ -105,11 +106,10 @@
                 </tbody>
             </table>
         </div>
-        <p uk-margin class="uk-text-right">
+        <p class="uk-text-right uk-margin">
             <button class="uk-button uk-button-danger uk-button-small" onclick="calculate()">Calcular decisión</button>
         </p>
     </div>
-
 </body>
 
 </html>

@@ -18,7 +18,8 @@ function validator(site) {
   let valuesLength = 0;
   let inputLength = 0;
   for (let i = 0; i < valuesList.length; i++) {
-    let input = valuesList[i].lastElementChild.firstElementChild.value;
+    let input = valuesList[i].lastElementChild.getElementsByTagName("input")[0]
+      .value;
     inputLength++;
     if (input.length !== 0) valuesLength++;
   }

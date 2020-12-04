@@ -40,10 +40,6 @@ function createDiv() {
   return document.createElement("div");
 }
 
-// function deleteInput(input) {
-//   input.parentElement.parentElement.remove();
-// }
-
 // -------------------------- GENERAL FUNCTIONS -------------------------- //
 
 function setInitialVisibility() {
@@ -70,7 +66,7 @@ function addElement(element) {
   if (element === "option") {
     addOption(element);
   } else {
-    addVar(element);
+    addVar();
   }
 }
 
@@ -105,16 +101,13 @@ function createSpan() {
   let span = document.createElement("span");
   span.className = "uk-badge uk-button deleteInput";
   span.innerHTML = "-";
-  span.addEventListener(onclick, function () {
-    span.parentElement.parentElement.remove();
-  });
   return span;
 }
 
 // -------------------------- OPTIONS -------------------------- //
 
 function addOption(element) {
-  optionListLength = optionListLength + 1;
+  optionListLength++;
   let optionList = getOptionListElement();
   optionList.appendChild(createContainer(element));
 }
@@ -128,10 +121,29 @@ function setUpOptionList() {
 
 function createContainer(element) {
   let div = createDiv();
-  div.className = "uk-form-controls";
+  div.className = "uk-form-controls inputAdd";
   div.appendChild(createLabel(element));
   div.appendChild(createInput());
   return div;
+}
+
+function deleteInput(type) {
+  const inputsAd = document.getElementsByClassName("inputAdd");
+
+  for (let i = 0; i < inputsAd.length; i++) {
+    let input = inputsAd[i];
+    let span;
+    if (type === "option") span = input.children[1].children[1];
+    else span = input.children[0].children[1].children[1];
+    span.addEventListener("click", () => {
+      input.remove();
+      if (type === "option") {
+        optionListLength--;
+      } else {
+        varListLength--;
+      }
+    });
+  }
 }
 
 // -------------------------- VARS -------------------------- //
@@ -140,17 +152,33 @@ function setUpVarList() {
   let varList = getVarListElement().children;
   for (const element of varList) {
     if (element.tagName == "DIV") {
-      varListGlobal.push(element.children[1].lastElementChild.value);
+      if (element.classList.contains("inputAdd")) {
+        varListGlobal.push(
+          element.children[0].children[1].firstElementChild.value
+        );
+      } else {
+        varListGlobal.push(element.children[1].lastElementChild.value);
+      }
     }
   }
   setUpPriorityList();
 }
 
-function addVar(element) {
+function addVar() {
   varListLength = varListLength + 1;
   let varList = getVarListElement();
-  varList.appendChild(createLabel(element));
-  varList.appendChild(createInput(element));
+  let div = createDiv();
+  div.className = "uk-form-controls inputAdd";
+  div.innerHTML = `
+  <div class="uk-form-controls">
+    <label class="uk-form-label">Variable ${varListLength}</label>
+    <div class="uk-flex">
+        <input class="uk-input" type="text" placeholder="Variable">
+        <span class="uk-badge uk-button deleteInput">-</span>
+    </div>
+  </div>
+  `;
+  varList.appendChild(div);
 }
 
 // -------------------------- PRIORITY LIST -------------------------- //
@@ -226,8 +254,10 @@ function createSelectInput() {
   let td = document.createElement("td");
   let div = createDiv();
   let select = document.createElement("select");
+  select.className = "uk-select select";
   for (let i = 0; i < optionListGlobal.length; i++) {
     let option = document.createElement("option");
+    debugger;
     option.setAttribute("value", i + 1);
     option.innerText = i + 1;
     select.appendChild(option);
